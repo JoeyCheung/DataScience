@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="pingback" href="https://www.statology.org/xmlrpc.php" />
+
+<!-- Optimized by SG Optimizer plugin version - 5.7.12 -->
+	<!-- This site is optimized with the Yoast SEO plugin v15.5 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>How to Perform a Breusch-Pagan Test in Python - Statology</title>
+	<meta name="description" content="A simple explanation of how to perform and interpret a Breusch-Pagan Test in Python." />
+	<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+	<link rel="canonical" href="https://www.statology.org/breusch-pagan-test-python/" />
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="How to Perform a Breusch-Pagan Test in Python - Statology" />
+	<meta property="og:description" content="A simple explanation of how to perform and interpret a Breusch-Pagan Test in Python." />
+	<meta property="og:url" content="https://www.statology.org/breusch-pagan-test-python/" />
+	<meta property="og:site_name" content="Statology" />
+	<meta property="article:published_time" content="2020-07-20T14:56:18+00:00" />
+	<meta property="article:modified_time" content="2020-12-31T16:04:45+00:00" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:label1" content="Written by">
+	<meta name="twitter:data1" content="Zach">
+	<meta name="twitter:label2" content="Est. reading time">
+	<meta name="twitter:data2" content="2 minutes">
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://www.statology.org/#website","url":"https://www.statology.org/","name":"Statology","description":"Statistics Made Easy","potentialAction":[{"@type":"SearchAction","target":"https://www.statology.org/?s={search_term_string}","query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@type":"WebPage","@id":"https://www.statology.org/breusch-pagan-test-python/#webpage","url":"https://www.statology.org/breusch-pagan-test-python/","name":"How to Perform a Breusch-Pagan Test in Python - Statology","isPartOf":{"@id":"https://www.statology.org/#website"},"datePublished":"2020-07-20T14:56:18+00:00","dateModified":"2020-12-31T16:04:45+00:00","author":{"@id":"https://www.statology.org/#/schema/person/4e91eed02b388c7a104fc993c894e91f"},"description":"A simple explanation of how to perform and interpret a Breusch-Pagan Test in Python.","inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://www.statology.org/breusch-pagan-test-python/"]}]},{"@type":"Person","@id":"https://www.statology.org/#/schema/person/4e91eed02b388c7a104fc993c894e91f","name":"Zach","image":{"@type":"ImageObject","@id":"https://www.statology.org/#personlogo","inLanguage":"en-US","url":"https://secure.gravatar.com/avatar/958f66fbe89e80753a8c8a0492bf5cc8?s=96&d=mm&r=g","caption":"Zach"}}]}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//scripts.mediavine.com' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Statology &raquo; Feed" href="https://www.statology.org/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Statology &raquo; Comments Feed" href="https://www.statology.org/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Statology &raquo; How to Perform a Breusch-Pagan Test in Python Comments Feed" href="https://www.statology.org/breusch-pagan-test-python/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.1\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.statology.org\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.6"}};
+			!function(e,a,t){var r,n,o,i,p=a.createElement("canvas"),s=p.getContext&&p.getContext("2d");function c(e,t){var a=String.fromCharCode;s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,e),0,0);var r=p.toDataURL();return s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,t),0,0),r===p.toDataURL()}function l(e){if(!s||!s.fillText)return!1;switch(s.textBaseline="top",s.font="600 32px Arial",e){case"flag":return!c([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])&&(!c([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!c([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]));case"emoji":return!c([55357,56424,8205,55356,57212],[55357,56424,8203,55356,57212])}return!1}function d(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(i=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},o=0;o<i.length;o++)t.supports[i[o]]=l(i[o]),t.supports.everything=t.supports.everything&&t.supports[i[o]],"flag"!==i[o]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[i[o]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(r=t.source||{}).concatemoji?d(r.concatemoji):r.wpemoji&&r.twemoji&&(d(r.twemoji),d(r.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='wp-block-library-css'  href='https://www.statology.org/wp-includes/css/dist/block-library/style.min.css?ver=5.6' type='text/css' media='all' />
+<link rel='stylesheet' id='contact-form-7-css'  href='https://www.statology.org/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=5.3.2' type='text/css' media='all' />
+<link rel='stylesheet' id='wisteria-bootstrap-custom-css'  href='https://www.statology.org/wp-content/themes/wisteria/css/bootstrap-custom.css?ver=5.6' type='text/css' media='all' />
+<link rel='stylesheet' id='font-awesome-css'  href='https://www.statology.org/wp-content/themes/wisteria/css/fontawesome-all.css?ver=5.6' type='text/css' media='all' />
+<link rel='stylesheet' id='wisteria-fonts-css'  href='https://fonts.googleapis.com/css?family=Montserrat%3A400%2C700%7CLato%3A400%2C400i%2C700%2C700i&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='wisteria-style-css'  href='https://www.statology.org/wp-content/themes/wisteria/style.css?ver=5.6' type='text/css' media='all' />
+<style id='wisteria-style-inline-css' type='text/css'>
+.credits-designer{ clip:rect(1px, 1px, 1px, 1px); position:absolute; }
+</style>
+<script type='text/javascript' src='https://www.statology.org/wp-includes/js/jquery/jquery.min.js?ver=3.5.1' id='jquery-core-js'></script>
+<script type='text/javascript' src='https://www.statology.org/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' async="async" data-noptimize="1" data-cfasync="false" src='https://scripts.mediavine.com/tags/statology.js?ver=5.6' id='mv-script-wrapper-js'></script>
+<link rel="https://api.w.org/" href="https://www.statology.org/wp-json/" /><link rel="alternate" type="application/json" href="https://www.statology.org/wp-json/wp/v2/posts/9416" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.statology.org/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.statology.org/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.6" />
+<link rel='shortlink' href='https://www.statology.org/?p=9416' />
+<link rel="alternate" type="application/json+oembed" href="https://www.statology.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.statology.org%2Fbreusch-pagan-test-python%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://www.statology.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.statology.org%2Fbreusch-pagan-test-python%2F&#038;format=xml" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-125586815-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-125586815-1');
+</script>
+	
+		<style type="text/css">
+			.site-title,
+		.site-description {
+			clip: rect(1px, 1px, 1px, 1px);
+			position: absolute;
+		}
+		</style>
+
+<link rel="icon" href="https://www.statology.org/wp-content/uploads/2019/08/cropped-StatologyFavicon-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://www.statology.org/wp-content/uploads/2019/08/cropped-StatologyFavicon-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://www.statology.org/wp-content/uploads/2019/08/cropped-StatologyFavicon-180x180.png" />
+<meta name="msapplication-TileImage" content="https://www.statology.org/wp-content/uploads/2019/08/cropped-StatologyFavicon-270x270.png" />
+		<style type="text/css" id="wp-custom-css">
+			p span {
+	font-family: 'Helvetica';
+	font-size: 19px;
+}
+
+ul li span {
+	font-family: 'Helvetica';
+	font-size: 19px;
+}
+
+/* Mediavine CSS */
+
+    @media only screen and (min-width: 992px) and (max-width: 1199px)  {
+
+    body.has-right-sidebar .content-area {
+        max-width: calc(100% - 330px);
+    }
+    body.has-right-sidebar #site-sidebar {
+        max-width: 330px !important;
+    }
+    
+    body.has-right-sidebar #secondary {
+        width: 300px;
+    }
+}
+
+
+/* iphone 5 */
+@media only screen and (max-width: 359px) {
+    .content-area {
+        width: 100% !important;
+        padding-left: 0px !important;
+        padding-right: 0px !important; 
+    }
+    article {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    } 
+}
+
+/* End Mediavine CSS */
+		</style>
+		</head>
+<body class="post-template-default single single-post postid-9416 single-format-standard wp-custom-logo has-right-sidebar has-excerpt">
+<div id="page" class="site-wrapper site">
+
+	
+<header id="masthead" class="site-header" role="banner">
+	<div class="container">
+		<div class="row">
+			<div class="col">
+
+				<div class="site-header-inside-wrapper">
+					<div class="site-branding-wrapper">
+						<div class="site-logo-wrapper"><a href="https://www.statology.org/" class="custom-logo-link" rel="home"><img width="5653" height="1624" src="https://www.statology.org/wp-content/uploads/2019/08/cropped-StatologyLogo_OnWhite-2.png" class="custom-logo" alt="Statology" srcset="https://www.statology.org/wp-content/uploads/2019/08/cropped-StatologyLogo_OnWhite-2.png 5653w, https://www.statology.org/wp-content/uploads/2019/08/cropped-StatologyLogo_OnWhite-2-300x86.png 300w, https://www.statology.org/wp-content/uploads/2019/08/cropped-StatologyLogo_OnWhite-2-768x221.png 768w, https://www.statology.org/wp-content/uploads/2019/08/cropped-StatologyLogo_OnWhite-2-1024x294.png 1024w" sizes="(max-width: 5653px) 100vw, 5653px" /></a></div>
+						<div class="site-branding">
+															<p class="site-title"><a href="https://www.statology.org/" title="Statology" rel="home">Statology</a></p>
+							
+														<p class="site-description">Statistics Made Easy</p>
+													</div>
+					</div><!-- .site-branding-wrapper -->
+				</div><!-- .site-header-inside-wrapper -->
+
+			</div><!-- .col -->
+		</div><!-- .row -->
+	</div><!-- .container -->
+</header><!-- #masthead -->
+
+<nav id="site-navigation" class="main-navigation" role="navigation">
+	<div class="container">
+		<div class="row">
+			<div class="col">
+
+				<div class="main-navigation-inside">
+
+					<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+					<div class="toggle-menu-wrapper">
+						<a href="#header-menu-responsive" title="Menu" class="toggle-menu-control">
+							<span class="toggle-menu-label">Menu</span>
+						</a>
+					</div>
+
+					<div class="site-header-menu"><ul id="menu-1" class="header-menu sf-menu"><li id="menu-item-338" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-338"><a href="https://www.statology.org/about/">About</a></li>
+<li id="menu-item-336" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-336"><a href="https://www.statology.org/tutorials/">Basic Stats</a></li>
+<li id="menu-item-11522" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11522"><a href="https://www.statology.org/machine-learning-tutorials/">Machine Learning</a></li>
+<li id="menu-item-10885" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-10885"><a href="https://www.statology.org/software-guides/">Software Tutorials</a>
+<ul class="sub-menu">
+	<li id="menu-item-1703" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1703"><a href="https://www.statology.org/excel-guides/">Excel</a></li>
+	<li id="menu-item-3252" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3252"><a href="https://www.statology.org/r-guides/">R</a></li>
+	<li id="menu-item-9166" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9166"><a href="https://www.statology.org/python-guides/">Python</a></li>
+	<li id="menu-item-10886" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10886"><a href="https://www.statology.org/google-sheets-guides/">Google Sheets</a></li>
+	<li id="menu-item-8656" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8656"><a href="https://www.statology.org/spss-guides/">SPSS</a></li>
+	<li id="menu-item-5664" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5664"><a href="https://www.statology.org/stata-guides/">Stata</a></li>
+	<li id="menu-item-6737" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6737"><a href="https://www.statology.org/ti-84-guides/">TI-84</a></li>
+</ul>
+</li>
+<li id="menu-item-10889" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-10889"><a href="https://www.statology.org/tools/">Tools</a>
+<ul class="sub-menu">
+	<li id="menu-item-337" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-337"><a href="https://www.statology.org/calculators/">Calculators</a></li>
+	<li id="menu-item-486" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-486"><a href="https://www.statology.org/tables/">Tables</a></li>
+	<li id="menu-item-1500" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1500"><a href="https://www.statology.org/chart-generators/">Charts</a></li>
+	<li id="menu-item-12077" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12077"><a href="https://www.statology.org/glossary/">Glossary</a></li>
+</ul>
+</li>
+</ul></div>
+				</div><!-- .main-navigation-inside -->
+
+			</div><!-- .col -->
+		</div><!-- .row -->
+	</div><!-- .container -->
+</nav><!-- .main-navigation -->
+
+	<div id="content" class="site-content">
+
+	<div class="container">
+		<div class="row">
+
+			<section id="primary" class="content-area col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8 col-xxl-8">
+				<main id="main" class="site-main" role="main">
+
+					<div id="post-wrapper" class="post-wrapper post-wrapper-single post-wrapper-post">
+										
+						
+<article id="post-9416" class="post-9416 post type-post status-publish format-standard hentry category-uncategorized mv-content-wrapper">
+
+	<div class="entry-header-wrapper entry-header-wrapper-single">
+		<div class="entry-meta entry-meta-single entry-meta-header-before">
+			<span class="posted-on"><span class="screen-reader-text">Posted on</span><a href="https://www.statology.org/breusch-pagan-test-python/" rel="bookmark"> <time class="entry-date published" datetime="2020-07-20T10:56:18-04:00">July 20, 2020</time><time class="updated" datetime="2020-12-31T11:04:45-05:00">December 31, 2020</time></a></span><span class="byline"> by <span class="author vcard"><a class="entry-author-link url fn n" href="https://www.statology.org/author/admin/" rel="author"><span class="entry-author-name">Zach</span></a></span></span>		</div><!-- .entry-meta -->
+
+		<header class="entry-header entry-header-single">
+			<h1 class="entry-title entry-title-single">How to Perform a Breusch-Pagan Test in Python</h1>		</header><!-- .entry-header -->
+	</div><!-- .entry-header-wrapper -->
+
+	<div class="entry-content entry-content-single">
+		<hr>
+<p><span style="color: #000000;">In regression analysis,&nbsp;<a href="https://www.statology.org/heteroscedasticity-regression/" target="_blank" rel="noopener">heteroscedasticity&nbsp;</a>refers to the unequal scatter of residuals. Specfically, it refers to the case where there is a systematic change in the spread of the residuals over the range of measured values.</span></p>
+<p><span style="color: #000000;">Heteroscedasticity is a problem because ordinary least squares (OLS) regression assumes that the residuals come from a population that has&nbsp;<em>homoscedasticity</em>, which means constant variance. When heteroscedasticity is present in a regression analysis, the results of the analysis become hard to trust.</span></p>
+<p><span style="color: #000000;">One way to determine if&nbsp;heteroscedasticity is present in a <a href="https://www.statology.org/linear-regression-python/" target="_blank" rel="noopener">regression analysis</a> is to use a&nbsp;<a href="https://www.statology.org/breusch-pagan-test/" target="_blank" rel="noopener">Breusch-Pagan Test</a><strong>.</strong></span></p>
+<p><span style="color: #000000;">This tutorial explains how to perform a Breusch-Pagan Test in Python.</span></p>
+<h3><span style="color: #000000;"><strong>Example: Breusch-Pagan Test in Python</strong></span></h3>
+<p><span style="color: #000000;">For this example we&#8217;ll&nbsp;use the following dataset that describes the attributes of 10 basketball players:</span></p>
+<pre style="background-color: #ececec; font-size: 15px;"><strong><span style="color: #107d3f;">import</span> numpy <span style="color: #107d3f;">as</span> np
+<span style="color: #107d3f;">import</span> pandas <span style="color: #107d3f;">as</span> pd
+
+<span style="color: #008080;">#create dataset</span>
+df = pd.DataFrame({'rating': [90, 85, 82, 88, 94, 90, 76, 75, 87, 86],
+                   'points': [25, 20, 14, 16, 27, 20, 12, 15, 14, 19],
+                   'assists': [5, 7, 7, 8, 5, 7, 6, 9, 9, 5],
+                   'rebounds': [11, 8, 10, 6, 6, 9, 6, 10, 10, 7]})
+
+<span style="color: #008080;">#view dataset
+</span>df
+
+	rating	points	assists	rebounds
+0	90	25	5	11
+1	85	20	7	8
+2	82	14	7	10
+3	88	16	8	6
+4	94	27	5	6
+5	90	20	7	9
+6	76	12	6	6
+7	75	15	9	10
+8	87	14	9	10
+9	86	19	5	7</strong></pre>
+<p><span style="color: #000000;">We will fit a multiple linear regression model using rating as the response variable and points, assists, and rebounds as the explanatory variables. Then we will perform a Breusch-Pagan Test to determine if&nbsp;heteroscedasticity is present in the regression.</span></p>
+<p><span style="color: #000000;"><strong>Step 1: Fit a multiple linear regression model.</strong></span></p>
+<p><span style="color: #000000;">First, we&#8217;ll fit a multiple linear regression model:</span></p>
+<pre style="background-color: #ececec; font-size: 15px;"><strong><span style="color: #107d3f;">import</span> statsmodels.formula.api <span style="color: #107d3f;">as</span> smf
+
+<span style="color: #008080;">#fit regression model</span>
+fit = smf.ols('rating ~ points+assists+rebounds', data=df).<span style="color: #008000;">fit</span>()
+
+<span style="color: #008080;">#view model summary
+</span><span style="color: #008000;">print</span>(fit.summary())
+</strong></pre>
+<p><span style="color: #000000;"><strong>Step 2: Perform a Breusch-Pagan test.</strong></span></p>
+<p><span style="color: #000000;">Next, we&#8217;ll perform a Breusch-Pagan test to determine if&nbsp;heteroscedasticity is present.</span></p>
+<pre style="background-color: #ececec; font-size: 15px;"><strong><span style="color: #107d3f;">from </span>statsmodels.compat <span style="color: #107d3f;">import </span>lzip
+<span style="color: #107d3f;">import</span> statsmodels.stats.api <span style="color: #107d3f;">as</span> sms
+
+<span style="color: #008080;">#perform Bresuch-Pagan test</span>
+names = ['Lagrange multiplier statistic', 'p-value',
+        'f-value', 'f p-value']
+test = sms.het_breuschpagan(fit.resid, fit.model.exog)
+
+lzip(names, test)
+
+[('Lagrange multiplier statistic', 6.003951995818433),
+ ('p-value', 0.11141811013399583),
+ ('f-value', 3.004944880309618),
+ ('f p-value', 0.11663863538255281)]</strong></pre>
+<p><span style="color: #000000;">A Breusch-Pagan test uses the following null and alternative hypotheses:</span></p>
+<p><span style="color: #000000;"><strong>The null hypothesis (H<sub>0</sub>):</strong>&nbsp;Homoscedasticity is present.</span></p>
+<p><span style="color: #000000;"><strong>The alternative hypothesis: (Ha):</strong>&nbsp;Homoscedasticity is <em>not&nbsp;</em>present (i.e. heteroscedasticity exists)</span></p>
+<p><span style="color: #000000;">In this example, the Lagrange multiplier statistic for the test is&nbsp;<strong>6.004&nbsp;</strong>and the corresponding p-value is&nbsp;<strong>0.1114</strong>.&nbsp;Because this p-value is not less than 0.05, we fail to reject the null hypothesis. We do not have sufficient evidence to say that heteroscedasticity is present in the regression model.</span></p>
+<h3><span style="color: #000000;"><strong>How to fix Heteroscedasticity</strong></span></h3>
+<p><span style="color: #000000;">In the previous example we saw that&nbsp;heteroscedasticity was not present in the regression model. However, when&nbsp;heteroscedasticity actually is present there are three common ways to remedy the situation:</span></p>
+<p><span style="color: #000000;"><strong>1.</strong>&nbsp;<strong>Transform the dependent variable.&nbsp;</strong>One way to fix&nbsp;heteroscedasticity is to transform the dependent variable in some way. One common transformation is to simply take the log of the dependent variable.</span></p>
+<p><span style="color: #000000;"><strong>2. Redefine the dependent variable.&nbsp;</strong>Another way to fix&nbsp;heteroscedasticity is to redefine the dependent variable. One common way to do so is to use a&nbsp;<em>rate</em>&nbsp;for the dependent variable, rather than the raw value.</span></p>
+<p><span style="color: #000000;"><strong>3. Use weighted regression.&nbsp;</strong>Another way to fix&nbsp;heteroscedasticity is to use weighted regression. This type of regression assigns a weight to each data point based on the variance of its fitted value. When the proper weights are used, this can eliminate the problem of heteroscedasticity.</span></p>
+<p><span style="color: #000000;">Read more details about each of these three methods in <a href="https://www.statology.org/heteroscedasticity-regression/" target="_blank" rel="noopener">this post</a>.</span></p>
+			</div><!-- .entry-content -->
+
+	<footer class="entry-meta entry-meta-single entry-meta-footer">
+			</footer><!-- .entry-meta -->
+
+</article><!-- #post-## -->
+
+						
+<div class="entry-author">
+	<div class="author-avatar">
+		<img alt='' src='https://secure.gravatar.com/avatar/958f66fbe89e80753a8c8a0492bf5cc8?s=80&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/958f66fbe89e80753a8c8a0492bf5cc8?s=160&#038;d=mm&#038;r=g 2x' class='avatar avatar-80 photo' height='80' width='80' loading='lazy'/>	</div><!-- .author-avatar -->
+
+	<div class="author-heading">
+		<h2 class="author-title">Published by <span class="author-name">Zach</span></h2>
+	</div><!-- .author-heading -->
+
+	<div class="author-bio">
+				<a class="author-link" href="https://www.statology.org/author/admin/" rel="author">
+			View all posts by Zach		</a>
+	</div><!-- .author-bio -->
+</div><!-- .entry-auhtor -->
+
+						
+	<nav class="navigation post-navigation" role="navigation" aria-label="Posts">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://www.statology.org/q-q-plot-python/" rel="prev"><span class="meta-nav">Prev</span> <span class="post-title">How to Create a Q-Q Plot in Python</span></a></div><div class="nav-next"><a href="https://www.statology.org/how-to-calculate-vif-in-python/" rel="next"><span class="meta-nav">Next</span> <span class="post-title">How to Calculate VIF in Python</span></a></div></div>
+	</nav>
+						
+<div id="comments" class="comments-area">
+
+	
+	
+	
+		<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/breusch-pagan-test-python/#respond" style="display:none;">Cancel reply</a></small></h3><form action="https://www.statology.org/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate><p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p><p class="comment-form-comment"><label for="comment">Comment</label> <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required"></textarea></p><p class="comment-form-author"><label for="author">Name <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" maxlength="245" required='required' /></p>
+<p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email" name="email" type="email" value="" size="30" maxlength="100" aria-describedby="email-notes" required='required' /></p>
+<p class="comment-form-url"><label for="url">Website</label> <input id="url" name="url" type="url" value="" size="30" maxlength="200" /></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Post Comment" /> <input type='hidden' name='comment_post_ID' value='9416' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p><p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="142"/></p></form>	</div><!-- #respond -->
+	
+</div><!-- #comments -->
+
+										</div><!-- .post-wrapper -->
+
+				</main><!-- #main -->
+			</section><!-- #primary -->
+
+			<div id="site-sidebar" class="sidebar-area col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 col-xxl-4">
+	<div id="secondary" class="sidebar widget-area sidebar-widget-area" role="complementary">
+		<aside id="search-2" class="widget widget_search"><h2 class="widget-title">Search</h2>
+<form role="search" method="get" class="search-form" action="https://www.statology.org/">
+	<label>
+		<span class="screen-reader-text">Search for:</span>
+		<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" title="Search for:" />
+	</label>
+	<button type="submit" class="search-submit"><span class="screen-reader-text">Search</span></button>
+</form>
+</aside><aside id="text-7" class="widget widget_text"><h2 class="widget-title">ABOUT</h2>			<div class="textwidget"><p>Statology is a site that makes learning statistics easy by explaining topics in simple and straightforward ways. <b><a style='color:purple' href="https://www.statology.org/about/">Learn more about us</a></b>.</p>
+</div>
+		</aside><aside id="text-13" class="widget widget_text"><h2 class="widget-title">Statistics Help</h2>			<div class="textwidget"><p>Looking for help with a homework or test question? We recommend using <b><a style='color:purple' href='https://chggtrx.com/clk.trk?CID=267627&#038;AFID=487896'>Chegg Study</a></b> to get step-by-step solutions from experts in your field.</p>
+</div>
+		</aside><aside id="custom_html-15" class="widget_text widget widget_custom_html"><h2 class="widget-title">Statistics in Excel Made Easy</h2><div class="textwidget custom-html-widget"><p><b>Statistics in Excel Made Easy</b> is a collection of 16 Excel spreadsheets that contain built-in formulas to perform the most commonly used statistical tests. Get the spreadsheets here:</p>
+<p style='text-align:center'><a href='https://gumroad.com/l/UDyseY'>
+<img src='https://www.statology.org/wp-content/uploads/2020/05/Statistics-in-Excel-COVER4-e1589823240380.png' alt='statistics in Excel made easy'/></a></p></div></aside><aside id="text-9" class="widget widget_text"><h2 class="widget-title">CALCULATORS</h2>			<div class="textwidget"><p>Try out our free <a href="https://www.statology.org/calculators/"><strong>online statistics calculators</strong></a> if you&#8217;re looking for some help finding probabilities, p-values, critical values, sample sizes, expected values, summary statistics, or correlation coefficients.</p>
+</div>
+		</aside>
+		<aside id="recent-posts-4" class="widget widget_recent_entries">
+		<h2 class="widget-title">Recent Posts</h2>
+		<ul>
+											<li>
+					<a href="https://www.statology.org/mean-absolute-error-calculator/">Mean Absolute Error Calculator</a>
+									</li>
+											<li>
+					<a href="https://www.statology.org/mean-absolute-error-python/">How to Calculate Mean Absolute Error in Python</a>
+									</li>
+											<li>
+					<a href="https://www.statology.org/interpret-z-scores/">How to Interpret Z-Scores (With Examples)</a>
+									</li>
+					</ul>
+
+		</aside>	</div><!-- .sidebar -->
+</div><!-- .col-* columns of main sidebar -->
+
+		</div><!-- .row -->
+	</div><!-- .container -->
+
+
+	</div><!-- #content -->
+
+	<footer id="colophon" class="site-footer" role="contentinfo">
+		<div class="site-info">
+	<div class="site-info-inside">
+
+		<div class="container">
+
+			<div class="row">
+				<div class="col">
+					<div class="credits">
+						<div class="credits credits-blog">&copy; Copyright 2019 | <a href="http://www.statology.org/">Statology | <a href="http://www.statology.org/privacy-policy">Privacy Policy </a></a></div><div class="credits credits-designer">Wisteria Theme by <a href="https://wpfriendship.com" title="WPFriendship">WPFriendship</a> <span>&sdot;</span> Powered by <a href="https://wordpress.org" title="WordPress">WordPress</a></div>
+					</div><!-- .credits -->
+				</div><!-- .col -->
+			</div><!-- .row -->
+
+		</div><!-- .container -->
+
+	</div><!-- .site-info-inside -->
+</div><!-- .site-info -->
+	</footer><!-- #colophon -->
+
+</div><!-- #page .site-wrapper -->
+
+<div class="overlay-effect"></div><!-- .overlay-effect -->
+
+<script type='text/javascript' id='contact-form-7-js-extra'>
+/* <![CDATA[ */
+var wpcf7 = {"apiSettings":{"root":"https:\/\/www.statology.org\/wp-json\/contact-form-7\/v1","namespace":"contact-form-7\/v1"}};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.statology.org/wp-content/plugins/contact-form-7/includes/js/scripts.js?ver=5.3.2' id='contact-form-7-js'></script>
+<script type='text/javascript' src='https://www.statology.org/wp-content/themes/wisteria/js/enquire.js?ver=2.1.2' id='enquire-js'></script>
+<script type='text/javascript' src='https://www.statology.org/wp-content/themes/wisteria/js/fitvids.js?ver=1.1' id='fitvids-js'></script>
+<script type='text/javascript' src='https://www.statology.org/wp-content/themes/wisteria/js/hover-intent.js?ver=r7' id='hover-intent-js'></script>
+<script type='text/javascript' src='https://www.statology.org/wp-content/themes/wisteria/js/superfish.js?ver=1.7.5' id='superfish-js'></script>
+<script type='text/javascript' src='https://www.statology.org/wp-includes/js/comment-reply.min.js?ver=5.6' id='comment-reply-js'></script>
+<script type='text/javascript' src='https://www.statology.org/wp-content/themes/wisteria/js/custom-min.js?ver=1.0' id='wisteria-custom-js'></script>
+<script type='text/javascript' src='https://www.statology.org/wp-includes/js/wp-embed.min.js?ver=5.6' id='wp-embed-js'></script>
+</body>
+</html>
